@@ -23,12 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    ScrollTitleView* view = [[ScrollTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30)];
-    [view initCellWithTitles:@[@"标题一",@"标题二",@"标题三",@"标题四"] Tag:0 WithColor:[UIColor redColor]];
+    ScrollTitleView* view = [[ScrollTitleView alloc] initWithFrame:CGRectMake(0, 20, self.view.bounds.size.width, 30)];
+    [view initCellWithTitles:@[@"标题一",@"标题二",@"标题",@"标题四四"] Tag:0 WithColor:[UIColor redColor]];
     
     view.delegate = self;
     [self.view addSubview:view];
-    UITableView* tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30, self.view.bounds.size.width, self.view.bounds.size.height - 30) style:UITableViewStylePlain];
+    UITableView* tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, self.view.bounds.size.height - 50) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
