@@ -9,8 +9,9 @@
 #import "ViewController.h"
 #import "CircleImageView.h"
 #import "CircleTableViewCell.h"
+#import "ScrollTitleView.h"
 
-@interface ViewController ()<CircleImageViewDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface ViewController ()<CircleImageViewDelegate,UITableViewDelegate,UITableViewDataSource,ScrollTitleViewDelegate>
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,assign)NSInteger currentPage;
 @property (nonatomic,assign)NSInteger oneImgCellNumber;
@@ -22,7 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    UITableView* tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    ScrollTitleView* view = [[ScrollTitleView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 30)];
+    [view initCellWithTitles:@[@"标题一",@"标题二",@"标题三",@"标题四"] Tag:0 WithColor:[UIColor redColor]];
+    
+    view.delegate = self;
+    [self.view addSubview:view];
+    UITableView* tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 30, self.view.bounds.size.width, self.view.bounds.size.height - 30) style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     [self.view addSubview:tableView];
@@ -87,6 +93,8 @@
 
         }
     }
-
+}
+-(void)touchTitle:(NSInteger)tag{
+    
 }
 @end
