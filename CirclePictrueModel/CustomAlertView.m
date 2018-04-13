@@ -14,6 +14,8 @@
 #import "NSAttributedString+NSAttributedString_Extension.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+Extension.h"
+#import "UIView+EXtension.h"
+
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 @interface CustomAlertView()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
@@ -70,6 +72,63 @@
         }
     }
      return self;
+}
+- (instancetype)initWithTitle:(NSString*)title Text:(NSString*)text AndType:(NSInteger)type{
+    if (self == [super init]) {
+        self.frame = [UIScreen mainScreen].bounds;
+        
+        self.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.8];
+        
+        UIButton* alphaBtn = [EBUtility btnfrome:[UIScreen mainScreen].bounds andText:@"" andColor:[UIColor clearColor] andimg:nil andView:self];
+        [alphaBtn addTarget:self action:@selector(remove) forControlEvents:UIControlEventTouchUpInside];
+        self.alertView = [[UIView alloc] init];
+        self.alertView.backgroundColor = [UIColor whiteColor];
+        
+        [self addSubview:self.alertView];
+        self.alertView.frame = CGRectMake(0, 0, 250, 150);
+        self.alertView.backgroundColor = [UIColor whiteColor];
+        self.alertView.center = self.center;
+        self.alertView.layer.masksToBounds = 1;
+        self.alertView.layer.cornerRadius = 10;
+        
+        UILabel* t = [EBUtility labfrome:CGRectMake(0, 20, 80, 20) andText:title andColor:[UIColor cyanColor] andView:self.alertView];
+        t.centerX = self.alertView.width/2;
+        t.font = [UIFont systemFontOfSize:20];
+        [t sizeToFit];
+        UILabel* c = [EBUtility labfrome:CGRectMake(0, 55, self.alertView.width - 40, 20) andText:text andColor:[UIColor blackColor] andView:self.alertView];
+        c.numberOfLines = 0;
+        c.font = [UIFont systemFontOfSize:14];
+        [c sizeToFit];
+        c.centerX = self.alertView.width/2;
+        
+        if (type == 0){
+            
+            UIButton* b = [EBUtility btnfrome:CGRectMake(0, 110, 80, 25) andText:@"确定" andColor:[UIColor whiteColor] andimg:nil andView:self.alertView];
+            b.backgroundColor = [UIColor cyanColor];
+            b.layer.cornerRadius = 12;
+            b.layer.masksToBounds = YES;
+            b.titleLabel.font = [UIFont systemFontOfSize:14];
+            [b addTarget:self action:@selector(touchBtn:) forControlEvents:UIControlEventTouchUpInside];
+            b.centerX = self.alertView.width/2;
+        }else if (type == 1){
+            UIButton* b1 = [EBUtility btnfrome:CGRectMake(0, 110, 70, 25) andText:@"确定" andColor:[UIColor whiteColor] andimg:nil andView:self.alertView];
+            b1.backgroundColor = [UIColor cyanColor];
+            b1.layer.cornerRadius = 12;
+            b1.layer.masksToBounds = YES;
+            b1.titleLabel.font = [UIFont systemFontOfSize:14];
+            [b1 addTarget:self action:@selector(touchBtn:) forControlEvents:UIControlEventTouchUpInside];
+            b1.centerX = self.alertView.width/2 - 50;
+            UIButton* b2 = [EBUtility btnfrome:CGRectMake(0, 110, 70, 25) andText:@"取消" andColor:[UIColor whiteColor] andimg:nil andView:self.alertView];
+            b2.backgroundColor = [UIColor lightGrayColor];
+            b2.layer.cornerRadius = 12;
+            b2.layer.masksToBounds = YES;
+            b2.titleLabel.font = [UIFont systemFontOfSize:14];
+            b2.tag = 1;
+            [b2 addTarget:self action:@selector(remove) forControlEvents:UIControlEventTouchUpInside];
+            b2.centerX = self.alertView.width/2 + 50;
+        }
+    }
+    return self;
 }
 
 - (instancetype)initWithDateBlock:(void (^)(NSString* date))completion{

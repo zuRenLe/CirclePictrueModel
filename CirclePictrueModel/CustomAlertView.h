@@ -23,5 +23,6 @@ typedef void(^AlertResult3)(NSString* str);
 - (instancetype)initWithVedio:(NSURL*)url;
 - (instancetype)initWithImages:(NSArray*)ary Index:(NSInteger)tag;
 - (instancetype)initWithAry:(NSArray*)ary;
+- (instancetype)initWithTitle:(NSString*)title Text:(NSString*)text AndType:(NSInteger)type;
 - (void)showAlertView;
 @end
